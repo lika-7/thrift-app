@@ -8,7 +8,7 @@ const NavItem = ({mobile}: {mobile?: boolean}) => {//Navbar안에서 2개의 Nav
                 <Link href="/admin">Admin</Link>
             </li>
             <li className='py-2 text-center border-b-4 cursor-pointer'>
-                <Link href="/admin">User</Link>
+                <Link href="/user">User</Link>
             </li>
             <li className='py-2 text-center border-b-4 cursor-pointer'>
                 <button>Sinout</button>
