@@ -30,6 +30,18 @@ export const authOptions:NextAuthOptions={
   ],
   session: { // session option 부분
     strategy: 'jwt',
+  },
+  callbacks: {
+    async jwt({token, user}){
+      // console.log('token',token)
+      // console.log('user',user)
+      return {...token, ...user}
+    },
+    async session({session, token}){//token 안에 데이터가 들어 있기 위해서 위에 jwt를 선언해줌
+      // console.log('@',session, token)
+      session.user = token
+      return session
+    }
   }
 }
 export default NextAuth(authOptions)
