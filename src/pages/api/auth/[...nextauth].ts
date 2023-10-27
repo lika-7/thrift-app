@@ -19,7 +19,7 @@ export const authOptions:NextAuthOptions={
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials, req) {
-        const user = {id: "1", name: "J Smith", email: "jsmith@example.com"}// 이 예제에서는 user 하드코딩 되어 있음
+        const user = {id: "1", name: "J Smith", email: "jsmith@example.com",role: "Admin"}// 이 예제에서는 user 하드코딩 되어 있음
         if (user){
           return user
         }else{
@@ -30,6 +30,10 @@ export const authOptions:NextAuthOptions={
   ],
   session: { // session option 부분
     strategy: 'jwt',
+  },
+  jwt:{
+    secret: process.env.JWT_SECRET,
+    maxAge: 30*24*60*60 // 30일
   },
   callbacks: {
     async jwt({token, user}){
