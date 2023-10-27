@@ -35,7 +35,7 @@ const Button:React.FC<ButtonProps> = ({
             ${outline ? 'border-black' : 'border-orange-500'}
             ${outline ? 'text-black' : 'text-white'}
             ${small ? 'text-sm' : 'text-md'}
-            ${small ? 'PY-1' : 'PY-3'}
+            ${small ? 'py-1' : 'py-3'}
             ${small ? 'font-light' : 'font-semibold'}
             ${small ? 'border-[1px]' : 'border-2'}
         `}
@@ -43,6 +43,7 @@ const Button:React.FC<ButtonProps> = ({
        {Icon &&(
             <Icon size={24} className='absolute left-4 top-3'/>
        )} 
+       {label}
     </button>
   )
 }

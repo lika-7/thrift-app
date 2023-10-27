@@ -8,7 +8,7 @@ function Navbar() {
     // useState는 클라이언트 컴포넌트임
     const [menu, setMenu] = useState(false)
 
-    const handelNenu= function (){
+    const handelMenu= function (){
         setMenu(!menu)
     }
     return (
@@ -19,8 +19,8 @@ function Navbar() {
                 </div>
                 <div className="text-2xl sm:hidden">
                     {menu === false 
-                        ? <button onClick={handelNenu}>+</button>
-                        :<button onClick={handelNenu}>-</button>
+                        ? <button onClick={handelMenu}>+</button>
+                        :<button onClick={handelMenu}>-</button>
                     }
                 </div>
                 <div className='hidden sm:block'>
