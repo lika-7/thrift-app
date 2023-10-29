@@ -2,13 +2,13 @@ import React from 'react'
 import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
 
 interface InputProps {
-    id: string,
-    label: string,
-    type?: string,
-    disabled?: boolean,
-    formatPrice?: boolean,
-    register:UseFormRegister<FieldValues>,
-    required?: boolean,
+    id: string
+    label: string
+    type?: string
+    disabled?: boolean
+    formatPrice?: boolean
+    register:UseFormRegister<FieldValues>
+    required?: boolean
     errors: FieldErrors
 }
 
@@ -26,7 +26,7 @@ const Input: React.FC<InputProps> = ({
   return (
     <div className="relative w-full">
         {formatPrice &&
-            <span className="absolute text-neutral-700 top-5 left-2"></span>
+            <span className="absolute text-neutral-700 top-5 left-2">￦</span>
         }
         <input 
             id={id}
