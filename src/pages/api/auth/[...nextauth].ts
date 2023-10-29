@@ -2,10 +2,8 @@ import NextAuth, { NextAuthOptions } from "next-auth"
 import GoogleProvider from "next-auth/providers/google"
 import CredentialsProvider from "next-auth/providers/credentials"
 import { PrismaAdapter } from "@next-auth/prisma-adapter"
-import { PrismaClient } from "@prisma/client"
-
-const prisma = new PrismaClient()
-
+import prisma from "@/helpers/prismadb"
+import bcrypt from 'bcryptjs'
 export const authOptions:NextAuthOptions={
   adapter: PrismaAdapter(prisma),
   providers: [
@@ -15,16 +13,34 @@ export const authOptions:NextAuthOptions={
     }),
     CredentialsProvider({
       credentials: {
-        username: { label: "Username", type: "text",placeholder:"jsmith"},
+        email: { label: "Email", type: "text"},
         password: { label: "Password", type: "password" }
       },
       async authorize(credentials, req) {
-        const user = {id: "1", name: "J Smith", email: "jsmith@example.com",role: "Admin"}// 이 예제에서는 user 하드코딩 되어 있음
-        if (user){
-          return user
-        }else{
-          return null
+        if(!credentials?.email || !credentials?.password){
+          throw new Error('Invalid credentials')
         }
+
+        const user = await prisma.user.findUnique({
+          where: {
+            email: credentials.email
+          }
+        })
+
+        if(!user || !user?.hashedPassword){ //Oauth로 로그인 한것 처리
+          throw new Error('Invalid credentials')
+        }
+
+        const isCorrectPassword = await bcrypt.compare(
+          credentials.password,
+          user.hashedPassword
+        )
+
+        if(!isCorrectPassword){
+          throw new Error('Invalid credentials')
+        }
+        
+        return user
       }
     })
   ],

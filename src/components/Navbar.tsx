@@ -2,8 +2,13 @@
 import Link from 'next/link'
 import React, { useState } from 'react'
 import NavItem from './NavItem'
+import { User } from '@prisma/client'
 
-function Navbar() {
+interface NavbarProps{
+    currentUser?: User | null //타입은 prisma에 설정된 User를 타입으로 가져다 쓰면됨
+}
+
+function Navbar({currentUser}: NavbarProps) {
     // nextJS는 기본적으로 서버 컴포넌트임
     // useState는 클라이언트 컴포넌트임
     const [menu, setMenu] = useState(false)
@@ -24,14 +29,14 @@ function Navbar() {
                     }
                 </div>
                 <div className='hidden sm:block'>
-                    <NavItem />
+                    <NavItem currentUser={currentUser}/>
                 </div>
             </div>
             
             <div className="block sm:hidden">
                 {/* //분기처리 하기 위해 위해 Navitem 있고 아래도 Navitem 있음
                 //mobile은 분기처리 하기 위해서 props를 넣어준거임 */}
-                {(menu === false) ? null : <NavItem mobile/>}
+                {(menu === false) ? null : <NavItem mobile currentUser={currentUser}/>}
             </div>
         </nav>
     )
