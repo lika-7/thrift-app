@@ -6,6 +6,7 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form';
 import Button from '@/components/Button';
 import Container from '@/components/Container';
 import Heading from '@/components/Heading';
+import ImageUpload from './../../../components/ImageUpload';
 
 const ProductUploadPage = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -14,7 +15,7 @@ const ProductUploadPage = () => {
         register,
         handleSubmit,
         setValue,
-        watch,
+        watch, //react-hook-form 에서 제공하는 함수, defaultValues 내용이 업데이트 될 때마다 실행
         formState: {
             errors
         },
@@ -30,7 +31,11 @@ const ProductUploadPage = () => {
             price:1
         }
     })
+    const imageSrc = watch('imageSrc')
 
+    const setCustomValue = (id: string, value: any) =>{
+        setValue(id, value)
+    }
     const onSubmit: SubmitHandler<FieldValues> = (data) =>{
 
     }
@@ -47,6 +52,10 @@ const ProductUploadPage = () => {
                 <Heading 
                     title="Product Upload"
                     subtitle="upload your product"
+                />
+                <ImageUpload 
+                    onChange={(value) => setCustomValue('imageSrc', value)}
+                    value={imageSrc}
                 />
                 <form 
                     className='
