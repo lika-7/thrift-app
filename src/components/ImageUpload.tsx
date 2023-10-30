@@ -16,10 +16,13 @@ const ImageUpload = ({
         console.log('result',result)
         onChange(result.info.secure_url)//secure_url은 https 로 받기 위해 사용
     }
+
+    const uploadPreset = process.env.NEXT_PUBLIC_CLOUDINARY_UPLOAD_PRESET
+
     return (
         <CldUploadWidget
             onUpload={handelUpload}
-            uploadPreset={'asdasd'}// 나중에 회원가입하고 넣어줘야 함 임의 값을 넣음
+            uploadPreset={uploadPreset}
             options={{
                 maxFiles:1 //파일 한게만 넣어주기
             }}
@@ -29,7 +32,7 @@ const ImageUpload = ({
                     <div
                         onClick={()=> open?.()}
                         className='
-                            relative felx flex-col items-center justify-center gap-4 p-20 transition border-2 border-dashed cursor-pointer hover:opacity-70 border-neutral-300 text-neutral-300'
+                            relative flex flex-col items-center justify-center gap-4 p-20 transition border-2 border-dashed cursor-pointer hover:opacity-70 border-neutral-300 text-neutral-300'
                     >
                         <TbPhotoPlus 
                             size={50}

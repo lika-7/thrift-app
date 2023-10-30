@@ -64,6 +64,7 @@ const ProductUploadPage = () => {
                         gap-8
                     '
                 >
+                    <hr />
                     <Input
                         id="title"
                         label="Title"
