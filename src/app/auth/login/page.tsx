@@ -38,7 +38,7 @@ import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
                 id="email"
                 label="Email"
                 disabled={isLoading}
-                register={register}
+                register={register}//props로 전달하는 register는 useForm에 있는 함수임 register 함수임
                 errors={errors}
                 required
             />
