@@ -7,6 +7,8 @@ import Button from '@/components/Button';
 import Container from '@/components/Container';
 import Heading from '@/components/Heading';
 import ImageUpload from './../../../components/ImageUpload';
+import CategoryInput from '@/components/categories/CategoryInput';
+import { categories } from '@/components/categories/Categories';
 
 const ProductUploadPage = () => {
     const [isLoading, setIsLoading] = useState(false)
@@ -32,6 +34,7 @@ const ProductUploadPage = () => {
         }
     })
     const imageSrc = watch('imageSrc')
+    const category = watch('category')
 
     const setCustomValue = (id: string, value: any) =>{
         setValue(id, value)
@@ -103,7 +106,17 @@ const ProductUploadPage = () => {
                             overflow-y-auto
                         '
                     >
-                        {/*category*/}
+                        {categories.map((item)=>(
+                            <div key={item.label} className='col-span-1'>
+                                <CategoryInput
+                                    onClick={(category) => setCustomValue('category',category)}
+                                    selected={category === item.path}
+                                    label={item.label}
+                                    icon={item.icon}
+                                    path={item.path}
+                                />
+                            </div>
+                        ))}
                     </div>
                     <hr />
                     {/*kakaoMap*/}
