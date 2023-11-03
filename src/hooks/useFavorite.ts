@@ -10,6 +10,7 @@ interface UseFavorite {
 
 const useFavorite = ({productId, currentUser}: UseFavorite) =>{
     const router = useRouter()
+    
     const hasFavorite = useMemo(()=>{
         const list = currentUser?.favoriteIds || [] // currentUser?.favoriteIds가 없으면 빈 배열 
 
