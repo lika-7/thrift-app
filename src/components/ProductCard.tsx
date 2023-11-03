@@ -5,6 +5,7 @@ import React from 'react'
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 import HeartButton from './HeartButton';
+import { fromNow } from '@/helpers/dayjs';
 
 interface ProductCardProps{
   data: Product
@@ -40,13 +41,13 @@ const ProductCard = ({data, currentUser}:ProductCardProps) => {
       <div className='font-light text-neutral-500'>
         {data.category}
       </div>
-      <div>
+      <div className='flex flex-row items-center justify-between gap-1'>
         <div>
           {data.price}{" "}
           <span className='font-light'></span>
         </div>
         <div>
-          {/* {data.createdAt} */}
+          {fromNow(data.createdAt)}
         </div>
       </div>
     </div>
