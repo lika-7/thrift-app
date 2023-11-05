@@ -1,3 +1,4 @@
+import { PRODUCTS_PER_PAGE } from '@/constants'
 import prisma from '@/helpers/prismadb'
 
 export interface ProductsParams{
@@ -10,7 +11,7 @@ export interface ProductsParams{
 
 export default async function getProducts(params: ProductsParams){
     try {
-        const { latitude, longitude, category} = params
+        const { latitude, longitude, category, skip} = params
         let query: any = {}
 
         if(category){// 쿼리한 내용에 category 있을 때 사용
@@ -35,7 +36,9 @@ export default async function getProducts(params: ProductsParams){
             where: query,
             orderBy: {
                 createdAt: 'desc'
-            }
+            },
+            skip: skip ? Number(skip): 0,
+            take: PRODUCTS_PER_PAGE
         })
 
         const totalItems = await prisma.product.count({
