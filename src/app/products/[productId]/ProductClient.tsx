@@ -7,6 +7,7 @@ import ProductHead from '@/components/products/ProductHead';
 import dynamic from 'next/dynamic';
 import Button from '@/components/Button';
 import { useRouter } from 'next/navigation';
+import { categories } from '@/components/categories/Categories';
 
 interface ProductClientProps {
     product: Product & {user: User} // user property 안에 내용이 들어 있으니 {user: User}로 선언
@@ -18,6 +19,8 @@ const ProductClient = ({product, currentUser}:ProductClientProps) => {
     const KakaoMap = dynamic(() => import('@/components/KakaoMap'),{
         ssr:false
     })
+
+    const category = categories.find((item)=> item.path === product.category)
 
     return (
         <Container>
@@ -35,7 +38,12 @@ const ProductClient = ({product, currentUser}:ProductClientProps) => {
                 <div
                     className='grid grid-cols-1 mt-6 md:grid-cols-2 md:gap-10'
                 >
-                    <ProductInfo />
+                    <ProductInfo 
+                        user={product.user}
+                        category={category}
+                        createdAt={product.createdAt}
+                        description={product.description}
+                    />
                     <div>
                         <KakaoMap  
                             detailPage
